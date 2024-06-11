@@ -1,0 +1,169 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.container {
+  text-align: center;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  background-image: linear-gradient(to bottom, #007bff, #0056b3);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.image-container {
+  margin-top: 20px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-container img {
+  max-width: 100%;
+  display: block;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#categoryDropdown {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+}
+
+.dropdown-container {
+  margin-top: 20px;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.dark-mode .image-container img {
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-toggle {
+  margin-top: 20px;
+}
+
+.dark-mode-toggle label {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dark-mode-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.dark-mode-toggle .toggle-slider {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 30px;
+}
+
+.dark-mode-toggle .toggle-slider:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #f1c40f;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.dark-mode-toggle input:checked+.toggle-slider {
+  background-color: #2ecc71;
+}
+
+.dark-mode-toggle input:checked+.toggle-slider:before {
+  transform: translateX(26px);
+}
+
+.dark-mode-toggle .toggle-slider:after {
+  position: absolute;
+  top: 2px;
+  left: 32px;
+  color: #fff;
+}
+
+.dark-mode-toggle input:checked+.toggle-slider:after {
+  left: 2px;
+}
+
+/* Custom loading spinner styles */
+.loading-spinner-container {
+  position: relative;
+  display: none;
+}
+
+.custom-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.loading-text {
+  color: #007bff;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

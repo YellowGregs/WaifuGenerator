@@ -1,0 +1,162 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #222;
+  color: #fff;
+  border-radius: 10px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  animation: pulse 2s infinite;
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+#result {
+  margin-top: 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #333;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+#result img {
+  display: block;
+  margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: 600px;
+}
+
+#result .tags-container {
+  margin-bottom: 10px;
+}
+
+#result .tag {
+  display: inline-block;
+  margin-right: 5px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#result .tag:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+#result a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid #007bff;
+  transition: color 0.3s ease-in-out;
+}
+
+#result a:hover {
+  color: #0056b3;
+}
+
+.refresh-button {
+  display: block;
+  margin-top: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.refresh-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.dropdown-container {
+  margin-top: 20px;
+  animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#tag-dropdown {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+#mode-dropdown {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+}

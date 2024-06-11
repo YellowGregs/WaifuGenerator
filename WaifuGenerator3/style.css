@@ -1,0 +1,112 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: linear-gradient(180deg, #292929, #292939);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  border-radius: 50%;
+  z-index: 2;
+  animation: slideIn 1s forwards;
+}
+
+.random-image {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.sfw {
+  margin-top: 10px;
+  display: flex;
+  animation: fadeIn 1s forwards;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.form-select {
+  padding: 10px 24px;
+  width: 150px;
+}
+
+.random-waifu {
+  margin-right: 10px;
+}
+
+.nsfw {
+  margin-top: 10px;
+  display: flex;
+  animation: fadeIn 1s forwards;
+}
+
+.random-waifu-nsfw {
+  margin-right: 10px;
+}
+
+.toggle {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  animation: fadeIn 1s forwards;
+}
+
+#nsfwToggle {
+  margin-right: 10px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 360px) {
+  .image-wrapper {
+    height: 50vh;
+  }
+}

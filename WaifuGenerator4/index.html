@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Waifu Image</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Using Waifu.im API</h1>
+    <P>Pick a tag for the image to work</P>
+    <div id="result">
+      <img src="https://www.gitbook.com/cdn-cgi/image/width=1280,dpr=2,height=640,fit=contain,format=auto/https%3A%2F%2F1369471896-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FEOup5T74lqSrRXj6Bgtv%252Fsocialpreview%252F0az4LNoHCPiy7uVKqVAh%252Ffavicon.png%3Falt%3Dmedia%26token%3D40a1c1c8-10a2-46e1-8a09-39e3488e59ee" alt="Image">
+      <a href="#" target="_blank">Source</a>
+      <div class="tags-container"></div>
+    </div>
+    <div class="dropdown-container">
+      <select id="mode-dropdown">
+        <option value="sfw">SFW</option>
+        <option value="nsfw">NSFW</option>
+      </select>
+    </div>
+    <div class="dropdown-container">
+      <select id="tag-dropdown"></select>
+    </div>
+    <button id="refresh-button" class="refresh-button">Refresh</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

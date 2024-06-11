@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nekos.best API Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Nekos.best API Demo</h1>
+    <div class="dropdown-container">
+      <label for="categoryDropdown">Select a category:</label>
+      <select id="categoryDropdown">
+        <option value="neko">Neko</option>
+        <option value="waifu">Waifu</option>
+        <option value="husbando">Husbando</option>
+        <option value="kitsune">Kitsune</option>
+        <option value="baka">Baka GIFs</option>
+        <option value="bite">Bite GIFs</option>
+        <option value="blush">Blush GIFs</option>
+        <option value="bored">Bored GIFs</option>
+        <option value="cry">Cry GIFs</option>
+        <option value="cuddle">Cuddle GIFs</option>
+        <option value="dance">Dance GIFs</option>
+        <option value="facepalm">Facepalm GIFs</option>
+        <option value="feed">Feed GIFs</option>
+        <option value="handhold">Handhold GIFs</option>
+        <option value="happy">Happy GIFs</option>
+        <option value="highfive">Highfive GIFs</option>
+        <option value="hug">Hug GIFs</option>
+        <option value="kick">Kick GIFs</option>
+        <option value="kiss">Kiss GIFs</option>
+        <option value="laugh">Laugh GIFs</option>
+        <option value="nod">Nod GIFs</option>
+        <option value="nom">Nom GIFs</option>
+        <option value="nope">Nope GIFs</option>
+        <option value="pat">Pat GIFs</option>
+        <option value="poke">Poke GIFs</option>
+        <option value="pout">Pout GIFs</option>
+        <option value="punch">Punch GIFs</option>
+        <option value="shoot">Shoot GIFs</option>
+        <option value="shrug">Shrug GIFs</option>
+        <option value="slap">Slap GIFs</option>
+        <option value="sleep">Sleep GIFs</option>
+        <option value="smile">Smile GIFs</option>
+        <option value="smug">Smug GIFs</option>
+        <option value="stare">Stare GIFs</option>
+        <option value="think">Think GIFs</option>
+        <option value="thumbsup">Thumbsup GIFs</option>
+        <option value="tickle">Tickle GIFs</option>
+        <option value="wave">Wave GIFs</option>
+        <option value="wink">Wink GIFs</option>
+        <option value="yeet">Yeet GIFs</option>
+        <option value="handshake">HandShake GIFs</option>
+        <option value="lurk">Lurk GIFs</option>
+        <option value="peck">Peck GIFs</option>
+        <option value="yawn">Yawn GIFs</option>
+      </select>
+    </div>
+    <button id="getRandomImageBtn">Get Random Image</button>
+    <!-- Image container -->
+    <div class="image-container">
+      <img id="nekoImage" src="https://media.tenor.com/fTGpfgspu1MAAAAd/anime.gif" alt="Random Neko">
+    </div>
+    <!-- Dark mode toggle -->
+    <div class="dark-mode-toggle">
+      <label for="darkModeCheckbox">🌙 Dark Mode</label>
+      <input type="checkbox" id="darkModeCheckbox">
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
