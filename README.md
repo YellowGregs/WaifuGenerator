@@ -4,6 +4,9 @@
   <img src="https://user-images.githubusercontent.com/101320329/236390742-1bdef734-7ea0-42da-876b-c2c0c2c857c7.png" alt="Sample Waifu Image" width="500">
 </div>
 
+----
+- Old Account that had the updated version of WaifuGenerator is now gone, this is just a old version of my old repositories, I will update the code to be newer :)
+
 ## 🚀 Versions
 
 There are 5 different versions of the Waifu Generator available, each using different APIs:
@@ -57,7 +60,7 @@ Meet the developers behind this project:
   <tr>
     <td align="center">
       <a href="https://github.com/YellowGreg">
-        <img src="https://avatars.githubusercontent.com/u/101320329?v=4" height="100" width="100" alt="YellowGreg avatar" />
+        <img src="https://avatars.githubusercontent.com/u/172260606?v=4" height="100" width="100" alt="YellowGreg avatar" />
         <br>
         <span><strong>YellowGreg</strong></span>
       </a>
