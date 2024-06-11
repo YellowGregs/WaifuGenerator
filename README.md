@@ -59,7 +59,7 @@ Meet the developers behind this project:
 <table align="center">
   <tr>
     <td align="center">
-      <a href="https://github.com/YellowGreg">
+      <a href="https://github.com/YellowGregs">
         <img src="https://avatars.githubusercontent.com/u/172260606?v=4" height="100" width="100" alt="YellowGreg avatar" />
         <br>
         <span><strong>YellowGreg</strong></span>
