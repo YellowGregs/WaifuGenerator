@@ -1,86 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Waifu Generator</title>
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <title>Waifu Generator 3</title>
   <link rel="stylesheet" href="./style.css">
-
-  <link rel="shortcut icon" href="./favicon-32x32.png" type="image/x-icon">
 </head>
-
 <body>
+  <main class="app-shell">
+    <section class="control-panel">
+      <p class="eyebrow">Version 3</p>
+      <h1>Using Waifu.pics API</h1>
 
-  <div class="app">
-    <div class="image-wrapper">
+      <div class="mode-switch" role="radiogroup" aria-label="Choose content mode">
+        <label class="mode-card" for="mode_sfw">
+          <input type="radio" id="mode_sfw" name="content_mode" value="sfw" checked>
+          <span>SFW</span>
+        </label>
+        <label class="mode-card" for="mode_nsfw">
+          <input type="radio" id="mode_nsfw" name="content_mode" value="nsfw">
+          <span>NSFW</span>
+        </label>
+      </div>
 
-      <img class="random-image img-fluid" src="" alt="">
-    </div>
+      <label class="field-label" for="tag_select">Category</label>
+      <div class="select-shell">
+        <select id="tag_select" class="tag-select"></select>
+        <span class="select-arrow" aria-hidden="true"></span>
+      </div>
 
-    <div class="toggle">
-      <input type="checkbox" id="nsfwToggle">
-      <label for="nsfwToggle"> nsfw?</label>
-    </div>
+      <div class="action-row">
+        <button id="generate_button" type="button">Fetch image</button>
+        <button id="shuffle_button" type="button" class="ghost-button">Random tag</button>
+      </div>
 
-    <div class="sfw">
-      <button class="random-waifu"> generate </button>
+      <div class="loading-track" aria-hidden="true">
+        <div id="load_bar" class="load-bar"></div>
+      </div>
+      <p id="status_line" class="status-line">Loading the first image...</p>
+    </section>
 
-      <select class="form-select">
-        <option value="waifu">waifu</option>
-        <option value="neko">neko</option>
-        <option value="shinobu">shinobu</option>
-        <option value="megumin">megumin</option>
-        <option value="bully">bully</option>
-        <option value="cuddle">cuddle</option>
-        <option value="cry">cry</option>
-        <option value="hug">hug</option>
-        <option value="awoo">awoo</option>
-        <option value="kiss">kiss</option>
-        <option value="lick">lick</option>
-        <option value="pat">pat</option>
-        <option value="sumg">smug</option>
-        <option value="bonk">bonk</option>
-        <option value="yeet">yeet</option>
-        <option value="blush">blush</option>
-        <option value="smile">smile</option>
-        <option value="wave">wave</option>
-        <option value="highfive">highfive</option>
-        <option value="handhold">handhold</option>
-        <option value="nom">nom</option>
-        <option value="bite">bite</option>
-        <option value="glomp">glomp</option>
-        <option value="slap">slap</option>
-        <option value="kill">kill</option>
-        <option value="kick">kick</option>
-        <option value="happy">happy</option>
-        <option value="wink">wink</option>
-        <option value="poke">poke</option>
-        <option value="dance">dance</option>
-        <option value="cringe">cringe</option>
-      </select>
-
-    </div>
-
-    <div class="nsfw">
-      <button class="random-waifu-nsfw"> generate </button>
-
-      <select class="form-select form-select-nsfw">
-        <option value="waifu">waifu</option>
-        <option value="neko">neko</option>
-        <option value="trap">trap</option>
-        <option value="blowjob">blowjob</option>
-
-      </select>
-
-    </div>
-  </div>
+    <section class="viewer-panel">
+      <div class="image-card">
+        <img id="random_image" class="random-image" src="" alt="Generated anime artwork">
+        <div class="image-overlay">
+          <span id="mode_badge" class="badge">SFW</span>
+          <span id="tag_badge" class="badge">waifu</span>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <script src="./main.js"></script>
 </body>
-
 </html>

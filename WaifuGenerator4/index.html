@@ -1,29 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Search Waifu Image</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waifu Generator 4</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Using Waifu.im API</h1>
-    <P>Pick a tag for the image to work</P>
-    <div id="result">
-      <img src="https://www.gitbook.com/cdn-cgi/image/width=1280,dpr=2,height=640,fit=contain,format=auto/https%3A%2F%2F1369471896-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FEOup5T74lqSrRXj6Bgtv%252Fsocialpreview%252F0az4LNoHCPiy7uVKqVAh%252Ffavicon.png%3Falt%3Dmedia%26token%3D40a1c1c8-10a2-46e1-8a09-39e3488e59ee" alt="Image">
-      <a href="#" target="_blank">Source</a>
-      <div class="tags-container"></div>
-    </div>
-    <div class="dropdown-container">
-      <select id="mode-dropdown">
-        <option value="sfw">SFW</option>
-        <option value="nsfw">NSFW</option>
-      </select>
-    </div>
-    <div class="dropdown-container">
-      <select id="tag-dropdown"></select>
-    </div>
-    <button id="refresh-button" class="refresh-button">Refresh</button>
-  </div>
+  <main class="app-shell">
+    <section class="hero-panel">
+      <p class="eyebrow">Version 4</p>
+      <h1>Using Waifu.im API</h1>
+
+      <div class="field-grid">
+        <label class="field">
+          <span>Mode</span>
+          <div class="select-shell">
+            <select id="mode_select">
+              <option value="sfw">SFW</option>
+              <option value="nsfw">NSFW</option>
+            </select>
+            <span class="select-arrow" aria-hidden="true"></span>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Tag</span>
+          <div class="select-shell">
+            <select id="tag_select"></select>
+            <span class="select-arrow" aria-hidden="true"></span>
+          </div>
+        </label>
+      </div>
+
+      <div class="button-row">
+        <button id="refresh_button" type="button">Load artwork</button>
+      </div>
+
+      <div class="loading-track" aria-hidden="true">
+        <div id="load_bar" class="load-bar"></div>
+      </div>
+      <p id="status_line" class="status-line">Loading artwork...</p>
+    </section>
+
+    <section class="result-panel">
+      <div class="image-shell">
+        <img id="result_image" src="" alt="Waifu.im result">
+      </div>
+
+      <div class="meta-panel">
+        <div class="meta-row">
+          <span class="meta-label">Artist source</span>
+          <a id="source_link" href="#" target="_blank" rel="noreferrer">Open source</a>
+        </div>
+
+        <div class="meta-row">
+          <span class="meta-label">Tags</span>
+          <div id="tags_container" class="tags-container"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>

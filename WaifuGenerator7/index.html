@@ -1,363 +1,433 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>Waifu Image Generator</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waifu Generator 7</title>
   <style>
+    :root {
+      --bg: #171017;
+      --panel: rgba(26, 16, 24, 0.82);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text-main: #fff1f6;
+      --text-soft: #d7b6c2;
+      --accent: #ff7b89;
+      --accent-alt: #ffc15e;
+      --shadow: 0 28px 90px rgba(0, 0, 0, 0.36);
+    }
+
+    * { box-sizing: border-box; }
     body {
-      background-color: #1a1a1a;
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      min-height: 100vh;
+      padding: 24px;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: "Segoe UI", Tahoma, sans-serif;
     }
 
-    .container {
-      max-width: 800px;
-      margin: 50px auto;
-      padding: 20px;
-      text-align: center;
-      border-radius: 10px;
-      background-color: #333333;
-      color: #ffffff;
-      transform: translateY(-50px);
-      opacity: 0;
-      animation: slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    .app-shell {
+      width: min(1120px, 100%);
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
     }
 
-    @keyframes slide-in {
-      from {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    .panel {
+      border-radius: 28px;
+      border: 1px solid var(--panel-border);
+      background: var(--panel);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
     }
 
-    h1 {
-      margin-bottom: 20px;
-      color: #ffffff;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    .sidebar {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .dropdown {
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
+    .viewer { padding: 18px; }
+    .eyebrow, .status-line { margin: 0; color: var(--text-soft); }
+    .eyebrow {
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.75rem;
     }
 
-    .dropdown-label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: bold;
-      color: #ffffff;
+    h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 0.95; }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
     }
 
-    .dropdown-select {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background-color: #292929;
-      color: #ffffff;
-      font-size: 16px;
-    }
-
-    .radio-group {
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .radio-label {
-      margin-right: 10px;
-      color: #ffffff;
-    }
-
-    .generate-button {
-      display: inline-block;
-      background-color: #AD4BB0;
-      color: white;
-      padding: 12px 24px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
-    }
-
-    .generate-button:hover {
-      background-color: #961BE8;
-    }
-
-    .image-container {
-      margin-top: 40px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    .mode-card {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100%;
-      height: 0;
-      padding-bottom: 100%;
+      gap: 8px;
+      padding: 14px 12px;
+      border-radius: 18px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .mode-card:has(input:checked) {
+      background: rgba(255, 123, 137, 0.16);
+    }
+
+    .mode-card input {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      border-radius: 999px;
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      background: transparent;
+    }
+
+    .mode-card:has(input:checked) input {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+
+    .select-shell {
       position: relative;
-      overflow: hidden;
-      animation: fade-in 0.5s ease-in-out;
     }
 
-    #waifu-image {
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
+    select, button {
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      font: inherit;
+    }
+
+    select {
+      appearance: none;
+      padding: 14px 16px;
+      color: #fff1f6;
+      -webkit-text-fill-color: #fff1f6;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    select option {
+      color: var(--text-main);
+      background: #241822;
+    }
+
+    .select-arrow {
       position: absolute;
-      top: 0;
-      left: 0;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+      top: 50%;
+      right: 16px;
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid var(--text-soft);
+      border-bottom: 2px solid var(--text-soft);
+      transform: translateY(-65%) rotate(45deg);
+      pointer-events: none;
     }
 
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
+    button {
+      padding: 14px 16px;
+      color: #261318;
+      font-weight: 700;
+      cursor: pointer;
+      background: var(--accent);
     }
 
-    .notification {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #ff4444;
-      color: #ffffff;
-      padding: 10px 20px;
-      border-radius: 5px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      z-index: 9999;
-      display: none;
+    .image-card {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .verification-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .image-card img {
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.7);
+      display: block;
+      object-fit: cover;
+      transition: opacity 0.25s ease;
+    }
+
+    .image-card img.is-loading { opacity: 0.4; }
+
+    .image-meta {
+      position: absolute;
+      inset: auto 18px 18px 18px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9998;
+      gap: 10px;
     }
 
-    .verification-box {
-      background-color: #292929;
-      border-radius: 10px;
-      padding: 20px;
-      max-width: 400px;
-      text-align: center;
+    .badge {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(15, 9, 13, 0.68);
+      color: var(--text-main);
     }
 
-    .verification-title {
-      color: #ffffff;
-      font-size: 24px;
-      margin-bottom: 20px;
+    .notice { color: #ffb4be; }
+
+    .loading-track {
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.08);
     }
 
-    .verification-buttons {
-      display: flex;
-      justify-content: center;
+    .load-bar {
+      width: 35%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--accent);
+      transform: translateX(-120%);
+      opacity: 0;
     }
 
-    .verification-button {
-      background-color: #AD4BB0;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: bold;
-      margin: 0 10px;
-      transition: background-color 0.3s ease;
+    .load-bar.is-active {
+      opacity: 1;
+      animation: slide-bar 1s ease-in-out infinite;
     }
 
-    .verification-button:hover {
-      background-color: #961BE8;
+    .dialog-shell {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0, 0, 0, 0.62);
+    }
+
+    .dialog-shell.is-open { display: grid; }
+
+    .dialog {
+      width: min(420px, 100%);
+      padding: 24px;
+      border-radius: 24px;
+      background: #1e1219;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+    }
+
+    .dialog h2 { margin-top: 0; }
+    .dialog-actions { display: flex; gap: 10px; margin-top: 18px; }
+    .dialog-actions button:last-child {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+
+    @keyframes slide-bar {
+      from { transform: translateX(-120%); }
+      to { transform: translateX(320%); }
+    }
+
+    @media (max-width: 920px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .image-card { min-height: 400px; }
     }
   </style>
-  <script>
-    let isOver18 = null;
-
-    function generateImage() {
-      if (isOver18 || document.querySelector('input[name="api-type"]:checked').value === "sfw") {
-        const sfwDropdown = document.getElementById("sfw-tags-dropdown");
-        const nsfwDropdown = document.getElementById("nsfw-tags-dropdown");
-        const selectedTag = (document.querySelector('input[name="api-type"]:checked').value === "nsfw") ? nsfwDropdown.value : sfwDropdown.value;
-        const apiType = document.querySelector('input[name="api-type"]:checked').value;
-
-        let apiUrl;
-        if (apiType === "nsfw") {
-          apiUrl = `https://api.waifu.pics/nsfw/${selectedTag}`;
-        } else {
-          apiUrl = `https://api.waifu.pics/sfw/${selectedTag}`;
-        }
-
-        fetch(apiUrl)
-          .then(response => response.json())
-          .then(data => {
-            const imageUrl = data.url;
-            const waifuImage = document.getElementById("waifu-image");
-            waifuImage.src = imageUrl;
-            waifuImage.style.opacity = 1;
-          })
-          .catch(error => {
-            console.log("Failed to fetch image:", error);
-          });
-      } else {
-        notification("You must verify your age to view NSFW content!");
-      }
-    }
-
-    function Tag_Dropdown() {
-      const nsfwDropdown = document.getElementById("nsfw-dropdown");
-      const sfwDropdown = document.getElementById("sfw-dropdown");
-      const apiType = document.querySelector('input[name="api-type"]:checked').value;
-
-      if (apiType === "nsfw") {
-        if (isOver18 === null) {
-          age_verfication();
-        } else if (!isOver18) {
-          notification("You must be over 18 to view NSFW content!");
-          document.getElementById("api-type-sfw").checked = true;
-        } else {
-          nsfwDropdown.style.display = "block";
-          sfwDropdown.style.display = "none";
-        }
-      } else {
-        nsfwDropdown.style.display = "none";
-        sfwDropdown.style.display = "block";
-      }
-    }
-
-    function notification(message) {
-      const notification = document.querySelector('.notification');
-      notification.textContent = message;
-      notification.style.display = 'block';
-      setTimeout(() => {
-        notification.style.display = 'none';
-      }, 3000);
-    }
-
-    function age_verfication() {
-      const verificationOverlay = document.createElement('div');
-      verificationOverlay.classList.add('verification-overlay');
-
-      const verificationBox = document.createElement('div');
-      verificationBox.classList.add('verification-box');
-
-      const verificationTitle = document.createElement('div');
-      verificationTitle.classList.add('verification-title');
-      verificationTitle.textContent = "Are you 18+ or over?";
-
-      const verificationButtons = document.createElement('div');
-      verificationButtons.classList.add('verification-buttons');
-
-      const yesButton = document.createElement('button');
-      yesButton.textContent = 'Yes';
-      yesButton.classList.add('verification-button');
-      yesButton.addEventListener('click', () => {
-        isOver18 = true;
-        Tag_Dropdown();
-        verificationOverlay.remove();
-      });
-
-      const noButton = document.createElement('button');
-      noButton.textContent = 'No';
-      noButton.classList.add('verification-button');
-      noButton.addEventListener('click', () => {
-        isOver18 = false;
-        notification("You must be over 18 to view NSFW content!");
-        document.getElementById("api-type-sfw").checked = true;
-        verificationOverlay.remove();
-      });
-
-      verificationButtons.appendChild(yesButton);
-      verificationButtons.appendChild(noButton);
-
-      verificationBox.appendChild(verificationTitle);
-      verificationBox.appendChild(verificationButtons);
-
-      verificationOverlay.appendChild(verificationBox);
-
-      document.body.appendChild(verificationOverlay);
-    }
-  </script>
 </head>
-
 <body>
-  <div class="container">
-    <h1>Waifu Image Generator</h1>
-    <div class="dropdown">
-      <label for="tags-dropdown" class="dropdown-label">Select a tag:</label>
-      <div id="sfw-dropdown">
-        <select id="sfw-tags-dropdown" class="dropdown-select">
-          <option value="waifu">waifu</option>
-          <option value="neko">neko</option>
-          <option value="shinobu">shinobu</option>
-          <option value="megumin">megumin</option>
-          <option value="bully">bully</option>
-          <option value="cuddle">cuddle</option>
-          <option value="cry">cry</option>
-          <option value="hug">hug</option>
-          <option value="awoo">awoo</option>
-          <option value="kiss">kiss</option>
-          <option value="lick">lick</option>
-          <option value="pat">pat</option>
-          <option value="smug">smug</option>
-          <option value="bonk">bonk</option>
-          <option value="yeet">yeet</option>
-          <option value="blush">blush</option>
-          <option value="smile">smile</option>
-          <option value="wave">wave</option>
-          <option value="highfive">highfive</option>
-          <option value="handhold">handhold</option>
-          <option value="nom">nom</option>
-          <option value="bite">bite</option>
-          <option value="glomp">glomp</option>
-          <option value="slap">slap</option>
-          <option value="kill">kill</option>
-          <option value="kick">kick</option>
-          <option value="happy">happy</option>
-          <option value="wink">wink</option>
-          <option value="poke">poke</option>
-          <option value="dance">dance</option>
-          <option value="cringe">cringe</option>
-        </select>
+  <main class="app-shell">
+    <section class="panel sidebar">
+      <p class="eyebrow">Version 7</p>
+      <h1>Using Waifu.pics API</h1>
+
+      <div class="mode-grid" role="radiogroup" aria-label="Content mode">
+        <label class="mode-card" for="mode_sfw">
+          <input id="mode_sfw" type="radio" name="content_mode" value="sfw" checked>
+          <span>SFW</span>
+        </label>
+        <label class="mode-card" for="mode_nsfw">
+          <input id="mode_nsfw" type="radio" name="content_mode" value="nsfw">
+          <span>NSFW</span>
+        </label>
       </div>
-      <div id="nsfw-dropdown" style="display: none;">
-        <select id="nsfw-tags-dropdown" class="dropdown-select">
-          <option value="waifu">waifu</option>
-          <option value="neko">neko</option>
-          <option value="trap">trap</option>
-        </select>
+
+      <label for="tag_select">Category</label>
+      <div class="select-shell">
+        <select id="tag_select"></select>
+        <span class="select-arrow" aria-hidden="true"></span>
       </div>
-    </div>
-    <div class="radio-group">
-      <input type="radio" id="api-type-nsfw" name="api-type" value="nsfw" onchange="Tag_Dropdown()">
-      <label for="api-type-nsfw" class="radio-label">NSFW</label>
-      <input type="radio" id="api-type-sfw" name="api-type" value="sfw" onchange="Tag_Dropdown()">
-      <label for="api-type-sfw" class="radio-label">SFW</label>
-    </div>
-    <button onclick="generateImage()" class="generate-button">Generate Waifu Image</button>
-    <div class="image-container">
-      <img id="waifu-image" alt="Waifu Image">
+
+      <button id="generate_button" type="button">Fetch image</button>
+      <div class="loading-track" aria-hidden="true">
+        <div id="load_bar" class="load-bar"></div>
+      </div>
+      <p id="status_line" class="status-line">Ready.</p>
+    </section>
+
+    <section class="panel viewer">
+      <div class="image-card">
+        <img id="waifu_image" src="" alt="Generated anime image">
+        <div class="image-meta">
+          <span id="mode_badge" class="badge">SFW</span>
+          <span id="tag_badge" class="badge">waifu</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="age_dialog_shell" class="dialog-shell" aria-hidden="true">
+    <div class="dialog">
+      <h2>Adult content check</h2>
+      <p>This version can request NSFW images. Confirm that you are 18 or older if you want to continue in NSFW mode.</p>
+      <div class="dialog-actions">
+        <button id="confirm_age_button" type="button">I am 18+</button>
+        <button id="cancel_age_button" type="button">Stay in SFW</button>
+      </div>
     </div>
   </div>
-  <div class="notification"></div>
-</body>
 
+  <script>
+    const tag_sets = {
+      sfw: ["waifu", "neko", "shinobu", "megumin", "bully", "cuddle", "cry", "hug", "awoo", "kiss", "lick", "pat", "smug", "bonk", "yeet", "blush", "smile", "wave", "highfive", "handhold", "nom", "bite", "glomp", "slap", "kill", "kick", "happy", "wink", "poke", "dance", "cringe"],
+      nsfw: ["waifu", "neko", "trap"]
+    };
+
+    const tag_select = document.getElementById("tag_select");
+    const waifu_image = document.getElementById("waifu_image");
+    const generate_button = document.getElementById("generate_button");
+    const status_line = document.getElementById("status_line");
+    const mode_badge = document.getElementById("mode_badge");
+    const tag_badge = document.getElementById("tag_badge");
+    const load_bar = document.getElementById("load_bar");
+    const age_dialog_shell = document.getElementById("age_dialog_shell");
+    const confirm_age_button = document.getElementById("confirm_age_button");
+    const cancel_age_button = document.getElementById("cancel_age_button");
+
+    let age_confirmed = false;
+
+    function selected_mode() {
+      return document.querySelector('input[name="content_mode"]:checked').value;
+    }
+
+    function open_age_dialog() {
+      age_dialog_shell.classList.add("is-open");
+      age_dialog_shell.setAttribute("aria-hidden", "false");
+    }
+
+    function close_age_dialog() {
+      age_dialog_shell.classList.remove("is-open");
+      age_dialog_shell.setAttribute("aria-hidden", "true");
+    }
+
+    function set_mode(mode_name) {
+      document.querySelector(`input[name="content_mode"][value="${mode_name}"]`).checked = true;
+      update_tag_options();
+      sync_badges();
+    }
+
+    function update_tag_options() {
+      const mode_name = selected_mode();
+      tag_select.innerHTML = "";
+      for (const tag_name of tag_sets[mode_name]) {
+        const option = document.createElement("option");
+        option.value = tag_name;
+        option.textContent = tag_name;
+        tag_select.appendChild(option);
+      }
+    }
+
+    function sync_badges() {
+      mode_badge.textContent = selected_mode().toUpperCase();
+      tag_badge.textContent = tag_select.value || "none";
+    }
+
+    async function generate_image() {
+      const mode_name = selected_mode();
+      const tag_name = tag_select.value;
+
+      if (mode_name === "nsfw" && !age_confirmed) {
+        open_age_dialog();
+        status_line.textContent = "Age confirmation is required before loading NSFW content.";
+        status_line.classList.add("notice");
+        return;
+      }
+
+      sync_badges();
+      generate_button.disabled = true;
+      waifu_image.classList.add("is-loading");
+      status_line.textContent = "Loading image...";
+      status_line.classList.remove("notice");
+      load_bar.classList.add("is-active");
+
+      try {
+        const response = await fetch(`https://api.waifu.pics/${mode_name}/${tag_name}`);
+        if (!response.ok) {
+          throw new Error(`Request failed with ${response.status}`);
+        }
+
+        const payload = await response.json();
+        if (!payload.url) {
+          throw new Error("Image URL missing in API response");
+        }
+
+        await preload_image(payload.url);
+        waifu_image.src = payload.url;
+        waifu_image.alt = `${mode_name.toUpperCase()} ${tag_name} image`;
+        status_line.textContent = `Showing ${tag_name} in ${mode_name.toUpperCase()} mode.`;
+      } catch (error) {
+        status_line.textContent = `Could not load image. ${error.message}`;
+        status_line.classList.add("notice");
+      } finally {
+        generate_button.disabled = false;
+        waifu_image.classList.remove("is-loading");
+        load_bar.classList.remove("is-active");
+      }
+    }
+
+    function preload_image(url) {
+      return new Promise((resolve, reject) => {
+        const preloaded_image = new Image();
+        preloaded_image.onload = resolve;
+        preloaded_image.onerror = () => reject(new Error("Image preload failed"));
+        preloaded_image.src = url;
+      });
+    }
+
+    document.querySelectorAll('input[name="content_mode"]').forEach((mode_input) => {
+      mode_input.addEventListener("change", () => {
+        if (selected_mode() === "nsfw" && !age_confirmed) {
+          open_age_dialog();
+          return;
+        }
+
+        update_tag_options();
+        sync_badges();
+        generate_image();
+      });
+    });
+
+    tag_select.addEventListener("change", sync_badges);
+    generate_button.addEventListener("click", generate_image);
+
+    confirm_age_button.addEventListener("click", () => {
+      age_confirmed = true;
+      close_age_dialog();
+      set_mode("nsfw");
+      generate_image();
+    });
+
+    cancel_age_button.addEventListener("click", () => {
+      close_age_dialog();
+      set_mode("sfw");
+      status_line.textContent = "NSFW mode stayed locked. You are still in SFW mode.";
+      status_line.classList.add("notice");
+    });
+
+    update_tag_options();
+    sync_badges();
+    generate_image();
+  </script>
+</body>
 </html>
